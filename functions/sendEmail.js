@@ -21,7 +21,7 @@ exports.handler = async function(event, context) {
 
     let mailOptions = {
         from: email,
-        to: 'jldhiraj123@gmail.com',
+        to: 'jireldhiraj123@gmail.com',
         subject: subject,
         html: `Name: ${name}<br>Email: ${email}<br>Message: ${message}`
     };

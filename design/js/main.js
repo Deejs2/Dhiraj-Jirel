@@ -40,14 +40,6 @@ document.querySelector('form').addEventListener('submit', function (event) {
             toastr.error('Failed to send email: ' + error.message);
         }
     }
-
-    // Example usage
-    sendEmail({
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        subject: 'Test Subject',
-        message: 'Test Message'
-    });
 });
 
 function validateEmail(email) {
