@@ -1,4 +1,4 @@
-document.querySelector('form').addEventListener('submit', function (event) {
+document.getElementById('contactForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
 
     // Form validation
