@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhiraj Jirel | Quick Start with Spring Boot</title>
+    <link rel="stylesheet" href="design/css/style.css">
+    <link rel="stylesheet" href="design/css/bootstrap.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-primary-color">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="index.html">Dhiraj Jirel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="text-white"><i class="fa-solid fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#service">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#project">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <div class="row g-5">
+            <div class="col-md-8">
+                <article class="blog-post">
+                    <h2 class="display-5 link-body-emphasis mb-1">Quick Start with Spring Boot</h2>
+                    <p class="blog-post-meta">July 28, 2024 by <a href="index.html#about">Dhiraj Jirel</a></p>
+
+                    <p>Spring Boot simplifies the process of building production-ready applications with Spring. This
+                        guide will take you through the basics of setting up a Spring Boot application and creating a
+                        simple RESTful web service.</p>
+
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Easy setup and configuration.</li>
+                        <li>Embedded server support (Tomcat, Jetty, Undertow).</li>
+                        <li>Comprehensive set of starter projects for common tasks.</li>
+                        <li>Built-in metrics and monitoring support.</li>
+                    </ul>
+
+                    <h2>Prerequisites</h2>
+                    <ul>
+                        <li>Java 11 or higher.</li>
+                        <li>IDE such as IntelliJ IDEA, Eclipse, or VS Code.</li>
+                        <li>Maven or Gradle for dependency management.</li>
+                    </ul>
+
+                    <h2>Getting Started</h2>
+                    <ol>
+                        <li>Download and Install Spring Boot:
+                            <pre><code>https://spring.io/projects/spring-boot</code></pre>
+                        </li>
+                        <li>Create a new Spring Boot project using Spring Initializr:
+                            <pre><code>https://start.spring.io/</code></pre>
+                        </li>
+                        <li>Choose your project settings:
+                            <ul>
+                                <li>Project: Maven/Gradle</li>
+                                <li>Language: Java</li>
+                                <li>Spring Boot: Latest stable version</li>
+                                <li>Project Metadata: Fill in your project details</li>
+                                <li>Dependencies: Add Web, JPA, and H2 Database</li>
+                            </ul>
+                        </li>
+                        <li>Download and unzip the project, then open it in your IDE.</li>
+                    </ol>
+
+                    <h2>Creating a Simple RESTful Service</h2>
+                    <h3>1. Create a Model Class</h3>
+                    <pre><code>
+package com.example.demo.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private double price;
+
+    // Getters and Setters
+}
+</code></pre>
+
+                    <h3>2. Create a Repository Interface</h3>
+                    <pre><code>
+package com.example.demo.repository;
+
+import com.example.demo.model.Product;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProductRepository extends CrudRepository<Product, Long> {
+}
+</code></pre>
+
+                    <h3>3. Create a Controller Class</h3>
+                    <pre><code>
+package com.example.demo.controller;
+
+import com.example.demo.model.Product;
+import com.example.demo.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return (List<Product>) productRepository.findAll();
+    }
+
+    @PostMapping
+    public Product addProduct(@RequestBody Product product) {
+        return productRepository.save(product);
+    }
+}
+</code></pre>
+
+                    <h3>4. Run the Application</h3>
+                    <pre><code>
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+</code></pre>
+
+                    <div class="py-3">
+                        <h2>Learn By Watching</h2>
+                        <p>Watch the video tutorial to learn how to quickly get started with Spring Boot:</p>
+                        <div class="ratio ratio-16x9">
+                            <iframe width="1280" height="720" src="https://www.youtube.com/embed/_2R_X04r6AQ"
+                                title="Spring Boot Quick Start Tutorial" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <h2>Documentation</h2>
+                    <p>For more details on Spring Boot, refer to the official documentation:</p>
+                    <ul>
+                        <li><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/"
+                                target="_blank">Spring Boot Reference Documentation</a></li>
+                        <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot Project
+                                Page</a></li>
+                    </ul>
+
+                </article>
+            </div>
+
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div>
+                        <h4 class="fst-italic">Recent Posts</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                                    href="send-mail-in-php.html">
+                                    <svg class="bd-placeholder-img" width="100%" height="96"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <rect width="100%" height="100%" fill="#777" />
+                                    </svg>
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">How To Send Mail In PHP</h6>
+                                        <small class="text-body-secondary">July 27, 2024</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                                    href="khalti-payment-integration.html">
+                                    <svg class="bd-placeholder-img" width="100%" height="96"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <rect width="100%" height="100%" fill="#777" />
+                                    </svg>
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">khalti Payment Integration</h6>
+                                        <small class="text-body-secondary">July 26, 2024</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                                    href="blog-on-jiri.html">
+                                    <svg class="bd-placeholder-img" width="100%" height="96"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <rect width="100%" height="100%" fill="#777" />
+                                    </svg>
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">The Switzerland Of Nepal</h6>
+                                        <small class="text-body-secondary">July 25, 2024</small>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Archives</h4>
+                        <ol class="list-unstyled mb-0">
+                            <li><a href="blog-on-jiri.html">July 25, 2024</a></li>
+                            <li><a href="khalti-payment-integration.html">July 26, 2024</a></li>
+                            <li><a href="send-mail-in-php.html">July 27, 2024</a></li>
+                            <li><a href="quickstart-spring-boot.html">July 28, 2024</a></li>
+                        </ol>
+                    </div>
+
+                    <div class="p-4">
+                        <h4 class="fst-italic">Elsewhere</h4>
+                        <ol class="list-unstyled d-flex pt-2">
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button onclick="window.open('https://www.instagram.com/dhiraj07j/', '_blank');"
+                                    type="button" class="btn btn-outline-primary me-2"><i
+                                        class="fa-brands fa-facebook fs-4"></i></button>
+                                <button onclick="window.open('https://www.instagram.com/dhiraj07j/', '_blank');"
+                                    type="button" class="btn btn-outline-primary me-2"><i
+                                        class="fa-brands fa-instagram fs-4"></i></button>
+                                <button onclick="window.open('https://github.com/Deejs2', '_blank');" type="button"
+                                    class="btn btn-outline-primary me-2"><i
+                                        class="fa-brands fa-github fs-4"></i></button>
+                                <button onclick="window.open('https://www.linkedin.com/in/dhiraj-j/', '_blank');"
+                                    type="button" class="btn btn-outline-primary me-2"><i
+                                        class="fa-brands fa-linkedin fs-4"></i></button>
+                            </div>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+        <p>&copy; Dhiraj Jirel 2024. All Rights reserved.</p>
+        <p class="mb-0">
+            <a href="#"><i class="fa-solid fa-rocket"></i> Back to top</a>
+        </p>
+    </footer>
+
+    <script src="design/js/bootstrap.bundle.js"></script>
+    <script src="https://kit.fontawesome.com/cbeb993ef9.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

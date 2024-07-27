@@ -1,0 +1,237 @@
+:root {
+    --primary-color: #000080;
+    --secondary-color: #ffffff;
+    --primary-color-opacity: #3636e5d5;
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+.bg-secondary-color {
+    background-color: var(--secondary-color);
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 var(--bs-navbar-toggler-focus-width);
+    color: white;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: var(--secondary-color) !important;
+    opacity: 1;
+}
+
+.nav-link {
+    color: var(--secondary-color) !important;
+    opacity: 0.9;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+    opacity: 1;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--primary-color) !important;
+    --bs-btn-border-color: var(--primary-color) !important;
+    --bs-btn-hover-bg: var(--primary-color) !important;
+    --bs-btn-hover-border-color: var(--primary-color) !important;
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: var(--secondary-color) !important;
+    --bs-btn-hover-color: var(--primary-color) !important;
+    --bs-btn-border-color: var(--secondary-color) !important;
+    --bs-btn-hover-bg: var(--secondary-color) !important;
+    --bs-btn-hover-border-color: var(--secondary-color) !important;
+}
+
+.btn-group>.btn:not(.dropdown-toggle),
+.btn-group>.btn.dropdown-toggle-split:first-child,
+.btn-group>.btn-group:not(:last-child)>.btn {
+    border-radius: 0;
+}
+
+/* Home Section */
+#home {
+    height: 100vh;
+}
+
+/* About Section */
+#about {
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.about-img {
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Services Section */
+#service {
+    height: 100vh;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.service-icon {
+    font-size: 3rem;
+}
+
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: .75rem;
+}
+
+.icon-square {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .75rem;
+}
+
+.feature-icon-small {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Project Section */
+#project .card .card-text, #project .card .card-title, #project .card i {
+    color: var(--primary-color);
+}
+
+/* Contact Section */
+#contact {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../../images/contact.jpg) no-repeat center center/cover;
+}
+
+/* CSS */
+.go-to-top-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.icon-link:hover {
+    background-color: var(--primary-color-opacity);
+    text-decoration: none;
+}
+
+/* Example: Adjusting the navbar for smaller screens */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-toggler {
+        margin-left: auto;
+    }
+
+    .primary-color,
+    .secondary-color,
+    .nav-link {
+        font-size: smaller;
+    }
+
+    .btn-group>.btn {
+        padding: 0.5rem 1rem;
+        font-size: smaller;
+    }
+}
+
+/* Responsive Image */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Adjusting padding and font size for smaller screens */
+@media (max-width: 768px) {
+    .container,
+    .container-fluid,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl,
+    .container-xxl {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .primary-color,
+    .secondary-color,
+    .nav-link {
+        font-size: smaller;
+    }
+}
+
+/* Responsive Sections */
+#about,
+#service,
+#contact {
+    height: auto;
+    padding: 50px 15px;
+}
+
+.service-icon,
+.feature-icon,
+.icon-square,
+.feature-icon-small {
+    font-size: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.feature-icon-small {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Project Section Adjustments */
+#project .card .card-text, #project .card .card-title, #project .card i {
+    color: var(--primary-color);
+}
+
+@media (max-width: 576px) {
+    #project .card .card-text, #project .card .card-title {
+        font-size: smaller;
+    }
+
+    #project .card i {
+        font-size: 1.2rem;
+    }
+}
