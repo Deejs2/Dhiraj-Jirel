@@ -17,27 +17,37 @@ document.querySelector('form').addEventListener('submit', function (event) {
         return;
     }
 
-    // SMTP.js email sending
-    Email.send({
-        Host: "smtp.elasticemail.com",
-        Username: "jldhiraj123@gmail.com", // Replace with your Gmail address
-        Password: "C2841F4F5DE46E75FE5EBFB5F7BAF8A2C64C", // Replace with your Gmail password or app password
-        To: 'jldhiraj123@gmail.com',
-        From: email,
-        Subject: subject,
-        Body: `Name: ${name}<br>Email: ${email}<br>Message: ${message}`,
-        Port: 2525
-    }).then(
-        message => {
-            console.log('Email sent successfully:', message);
-            toastr.success('Email sent successfully: ' + message);
-        }
-    ).catch(
-        error => {
+    // Send email using serverless function
+    async function sendEmail({ name, email, subject, message }) {
+        try {
+            let response = await fetch('/.netlify/functions/sendEmail', {
+                method: 'POST',
+                body: JSON.stringify({ name, email, subject, message }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            let result = await response.json();
+
+            if (response.ok) {
+                console.log('Email sent successfully:', result.message);
+                toastr.success('Email sent successfully: ' + result.message);
+            } else {
+                console.error('Failed to send email:', result.error);
+                toastr.error('Failed to send email: ' + result.error);
+            }
+        } catch (error) {
             console.error('Failed to send email:', error);
-            toastr.error('Failed to send email: ' + error);
+            toastr.error('Failed to send email: ' + error.message);
         }
-    );
+    }
+
+    // Example usage
+    sendEmail({
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        subject: 'Test Subject',
+        message: 'Test Message'
+    });
 });
 
 function validateEmail(email) {
