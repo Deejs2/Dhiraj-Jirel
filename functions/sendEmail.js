@@ -14,25 +14,41 @@ exports.handler = async function(event, context) {
         host: "smtp.elasticemail.com",
         port: 2525,
         auth: {
-            user: process.env.EMAIL_USER, // Set these in Netlify environment variables
-            pass: process.env.EMAIL_PASS  // Set these in Netlify environment variables
+            user: process.env.EMAIL_USER, // Use environment variable
+            pass: process.env.EMAIL_PASS  // Use environment variable
         }
     });
 
-    let mailOptions = {
-        from: email,
-        to: 'jireldhiraj123@gmail.com',
+    // Email to yourself
+    let mailOptionsToSelf = {
+        from: process.env.EMAIL_USER, // Use environment variable
+        replyTo: email,
+        to: process.env.EMAIL_USER, // Your email
         subject: subject,
         html: `Name: ${name}<br>Email: ${email}<br>Message: ${message}`
     };
 
+    // Confirmation email to the user
+    let mailOptionsToUser = {
+        from: process.env.EMAIL_USER, // Use environment variable
+        to: email,
+        subject: "Thank you for contacting us",
+        html: `Dear ${name},<br><br>Thank you for reaching out. We have received your message and will get back to you shortly.<br><br>Best regards,<br>Dhiraj Jirel`
+    };
+
     try {
-        let info = await transporter.sendMail(mailOptions);
+        // Send email to yourself
+        await transporter.sendMail(mailOptionsToSelf);
+
+        // Send confirmation email to the user
+        await transporter.sendMail(mailOptionsToUser);
+
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Email sent successfully: ' + info.response })
+            body: JSON.stringify({ message: 'Emails sent successfully' })
         };
     } catch (error) {
+        console.error('Failed to send email:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to send email: ' + error.message })
