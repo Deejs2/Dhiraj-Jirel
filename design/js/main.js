@@ -19,12 +19,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
     // Send email using serverless function
     async function sendEmail({ name, email, subject, message }) {
+        console.log('Sending email with data:', { name, email, subject, message });
         try {
             let response = await fetch('/.netlify/functions/sendEmail', {
                 method: 'POST',
                 body: JSON.stringify({ name, email, subject, message }),
                 headers: { 'Content-Type': 'application/json' }
             });
+            console.log('Response received:', response);
 
             let result = await response.json();
 

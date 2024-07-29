@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async function(event, context) {
+    console.log('Received event:', event);
     const { name, email, subject, message } = JSON.parse(event.body);
 
     if (!validateEmail(email)) {
