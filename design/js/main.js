@@ -40,6 +40,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
             toastr.error('Failed to send email: ' + error.message);
         }
     }
+
+    // Call the sendEmail function with the form data
+    sendEmail({ name, email, subject, message });
 });
 
 function validateEmail(email) {
